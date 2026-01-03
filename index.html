@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Key Race Game</title>
+  </head>
+  <body>
+    <!-- Settings Button -->
+    <button id="settings-btn" class="settings-btn">
+      <i class="fas fa-cog"></i>
+    </button>
+    
+    <!-- Settings Panel -->
+    <div class="settings hide" id="settings">
+      <div class="settings-content">
+        <h3><i class="fas fa-sliders-h"></i> Game Settings</h3>
+        <div class="setting-group">
+          <label for="difficulty">
+            <i class="fas fa-chart-line"></i> Difficulty Level
+          </label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label for="playerName">
+            <i class="fas fa-user"></i> Player Name
+          </label>
+          <input type="text" id="playerName" placeholder="Enter your name">
+        </div>
+        <button id="saveSettingsBtn" class="btn save-btn">
+          <i class="fas fa-save"></i> Save Settings
+        </button>
+        <div id="saveMessage" class="save-message"></div>
+      </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="mainMenu">
+      <div class="menu-container">
+        <h1>🎮 KEY RACE 🎮</h1>
+        <p class="subtitle">The Ultimate Typing Challenge</p>
+        
+        <div class="menu-cards">
+          <div class="menu-card" id="singlePlayerCard">
+            <div class="card-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>Single Player</h3>
+            <p>Practice your typing skills alone</p>
+            <div class="card-footer">
+              <button class="card-btn" id="startSinglePlayer">
+                <i class="fas fa-play"></i> Start Game
+              </button>
+            </div>
+          </div>
+          
+          <div class="menu-card" id="multiplayerCard">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Multiplayer</h3>
+            <p>Race against friends in real-time</p>
+            <div class="card-footer">
+              <button class="card-btn" id="startMultiplayer">
+                <i class="fas fa-play"></i> Play Multiplayer
+              </button>
+            </div>
+          </div>
+          
+          <div class="menu-card" id="howToPlayCard">
+            <div class="card-icon">
+              <i class="fas fa-question-circle"></i>
+            </div>
+            <h3>How to Play</h3>
+            <p>Learn the game rules</p>
+            <div class="card-footer">
+              <button class="card-btn" id="showHowToPlay">
+                <i class="fas fa-book"></i> View Guide
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="player-info-display">
+          <div class="info-item">
+            <i class="fas fa-user"></i>
+            <span>Player: <strong id="currentPlayerName">Player</strong></span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Difficulty: <strong id="currentDifficulty">Medium</strong></span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-cog"></i>
+            <span>Click the gear icon to change settings</span>
+          </div>
+        </div>
+        
+        <div class="high-score">
+          <h4><i class="fas fa-trophy"></i> Best Score</h4>
+          <div class="score-display" id="highScoreDisplay">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Single Player Game -->
+    <div id="singlePlayerScreen" class="hide">
+      <div class="game-container">
+        <div class="game-header">
+          <button class="back-btn" id="backToMenuBtn">
+            <i class="fas fa-arrow-left"></i> Main Menu
+          </button>
+          <div class="header-center">
+            <h2><i class="fas fa-keyboard"></i> TYPING CHALLENGE</h2>
+            <div class="difficulty-badge" id="gameDifficultyBadge">
+              Medium
+            </div>
+          </div>
+          <div class="player-display">
+            <i class="fas fa-user"></i> <span id="gamePlayerName">Player</span>
+          </div>
+        </div>
+        
+        <div class="game-stats-bar">
+          <div class="stat-item">
+            <div class="stat-label">
+              <i class="fas fa-clock"></i> Time Left
+            </div>
+            <div class="stat-value" id="timeLeft">20s</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">
+              <i class="fas fa-star"></i> Score
+            </div>
+            <div class="stat-value" id="currentScore">0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">
+              <i class="fas fa-bullseye"></i> Accuracy
+            </div>
+            <div class="stat-value" id="currentAccuracy">100%</div>
+          </div>
+        </div>
+        
+        <div class="word-area">
+          <div class="instruction">
+            <i class="fas fa-info-circle"></i> Type the word below:
+          </div>
+          <h1 id="currentWord">loading...</h1>
+          <div class="word-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" id="wordProgress"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-area">
+          <input 
+            type="text" 
+            id="textInput" 
+            placeholder="Start typing the word here..."
+            autocomplete="off"
+            autofocus
+          >
+          <div class="input-hint">
+            <i class="fas fa-lightbulb"></i> Press Enter after typing or wait for auto-check
+          </div>
+        </div>
+        
+        <div class="detailed-stats">
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-font"></i>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Words Typed</div>
+              <div class="detail-value" id="wordsTypedCount">0</div>
+            </div>
+          </div>
+          
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Correct Words</div>
+              <div class="detail-value" id="correctWordsCount">0</div>
+            </div>
+          </div>
+          
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Words/Min</div>
+              <div class="detail-value" id="wpmDisplay">0</div>
+            </div>
+          </div>
+          
+          <div class="detail-card">
+            <div class="detail-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Streak</div>
+              <div class="detail-value" id="currentStreak">0</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="game-controls">
+          <button class="btn pause-btn" id="pauseBtn">
+            <i class="fas fa-pause"></i> Pause
+          </button>
+          <button class="btn restart-btn" id="restartBtn">
+            <i class="fas fa-redo"></i> Restart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiplayer Game Screen -->
+    <div id="multiplayerScreen" class="hide">
+      <div class="game-container">
+        <div class="game-header">
+          <button class="back-btn" id="backToMenuFromMulti">
+            <i class="fas fa-arrow-left"></i> Main Menu
+          </button>
+          <div class="header-center">
+            <h2><i class="fas fa-users"></i> MULTIPLAYER RACE</h2>
+            <div class="difficulty-badge" id="multiDifficultyBadge">
+              Medium
+            </div>
+          </div>
+          <div class="player-display">
+            <i class="fas fa-user"></i> <span id="multiPlayerName">Player</span>
+          </div>
+        </div>
+        
+        <div class="lobby-section" id="lobbySection">
+          <div class="lobby-header">
+            <h3><i class="fas fa-door-open"></i> Game Lobby</h3>
+            <button class="btn create-room-btn" id="createRoomBtn">
+              <i class="fas fa-plus"></i> Create Room
+            </button>
+          </div>
+          
+          <div class="room-list" id="roomList">
+            <div class="room-item empty">
+              <i class="fas fa-search"></i>
+              <p>Searching for available rooms...</p>
+            </div>
+          </div>
+          
+          <div class="join-section">
+            <div class="join-input">
+              <input type="text" id="roomCodeInput" placeholder="Enter room code">
+              <button class="btn join-btn" id="joinRoomBtn">
+                <i class="fas fa-sign-in-alt"></i> Join Room
+              </button>
+            </div>
+            <div class="room-status" id="roomStatus"></div>
+          </div>
+        </div>
+        
+        <div class="room-section hide" id="roomSection">
+          <div class="room-info">
+            <div class="room-code">
+              <h4><i class="fas fa-hashtag"></i> Room Code:</h4>
+              <div class="code-display" id="roomCodeDisplay">----</div>
+              <button class="btn copy-btn" id="copyRoomCode">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+            
+            <div class="room-controls">
+              <button class="btn start-game-btn" id="startMultiGameBtn">
+                <i class="fas fa-play"></i> Start Game
+              </button>
+              <button class="btn leave-btn" id="leaveRoomBtn">
+                <i class="fas fa-sign-out-alt"></i> Leave Room
+              </button>
+            </div>
+          </div>
+          
+          <div class="players-list">
+            <h4><i class="fas fa-users"></i> Players in Room (<span id="playerCount">1</span>/4)</h4>
+            <div class="players-container" id="playersContainer">
+              <div class="player-item host">
+                <i class="fas fa-crown"></i>
+                <span class="player-name">Player (You)</span>
+                <span class="player-status ready">Ready</span>
+              </div>
+            </div>
+            
+            <div class="ready-section">
+              <button class="btn ready-btn" id="toggleReadyBtn">
+                <i class="fas fa-check-circle"></i> Ready
+              </button>
+              <div class="ready-status">
+                <span id="readyCount">1</span>/<span id="totalPlayers">1</span> players ready
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="multi-game-section hide" id="multiGameSection">
+          <div class="game-stats-bar">
+            <div class="stat-item">
+              <div class="stat-label">
+                <i class="fas fa-clock"></i> Time Left
+              </div>
+              <div class="stat-value" id="multiTimeLeft">60s</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">
+                <i class="fas fa-star"></i> Your Score
+              </div>
+              <div class="stat-value" id="multiCurrentScore">0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">
+                <i class="fas fa-bullseye"></i> Your Accuracy
+              </div>
+              <div class="stat-value" id="multiAccuracy">100%</div>
+            </div>
+          </div>
+          
+          <div class="word-area">
+            <div class="instruction">
+              <i class="fas fa-info-circle"></i> Type the word below:
+            </div>
+            <h1 id="multiCurrentWord">loading...</h1>
+            <div class="word-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" id="multiWordProgress"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="input-area">
+            <input 
+              type="text" 
+              id="multiTextInput" 
+              placeholder="Start typing the word here..."
+              autocomplete="off"
+              autofocus
+            >
+            <div class="input-hint">
+              <i class="fas fa-lightbulb"></i> Press Enter after typing
+            </div>
+          </div>
+          
+          <div class="multiplayer-scoreboard">
+            <h4><i class="fas fa-chart-bar"></i> Live Leaderboard</h4>
+            <div class="scoreboard-container" id="scoreboardContainer">
+              <!-- Player scores will appear here -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="multi-results-section hide" id="multiResultsSection">
+          <div class="results-header">
+            <h1><i class="fas fa-flag-checkered"></i> RACE FINISHED!</h1>
+            <div class="result-subtitle">Final Results</div>
+          </div>
+          
+          <div class="winner-display" id="winnerDisplay">
+            <!-- Winner will be shown here -->
+          </div>
+          
+          <div class="final-leaderboard" id="finalLeaderboard">
+            <!-- Final rankings will be shown here -->
+          </div>
+          
+          <div class="action-buttons">
+            <button class="btn play-again-btn" id="multiPlayAgainBtn">
+              <i class="fas fa-redo"></i> Play Again
+            </button>
+            <button class="btn menu-btn" id="multiGoToMenuBtn">
+              <i class="fas fa-home"></i> Main Menu
+            </button>
+            <button class="btn share-btn" id="shareMultiResultsBtn">
+              <i class="fas fa-share-alt"></i> Share Results
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="hide">
+      <div class="results-container">
+        <div class="results-header">
+          <h1><i class="fas fa-flag-checkered"></i> GAME OVER</h1>
+          <div class="result-subtitle">Time's up! Here are your results</div>
+        </div>
+        
+        <div class="results-grid">
+          <div class="result-card main-result">
+            <div class="result-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">FINAL SCORE</div>
+              <div class="result-value" id="finalScoreDisplay">0</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-icon">
+              <i class="fas fa-font"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">Words Typed</div>
+              <div class="result-value" id="finalWordsTyped">0</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">Accuracy</div>
+              <div class="result-value" id="finalAccuracyDisplay">100%</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">WPM</div>
+              <div class="result-value" id="finalWPMDisplay">0</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">Best Streak</div>
+              <div class="result-value" id="finalBestStreak">0</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-icon">
+              <i class="fas fa-medal"></i>
+            </div>
+            <div class="result-content">
+              <div class="result-label">High Score</div>
+              <div class="result-value" id="finalHighScore">0</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="results-message" id="resultsMessage">
+          <i class="fas fa-star"></i> Good job! Keep practicing to improve!
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn play-again-btn" id="playAgainBtn">
+            <i class="fas fa-redo"></i> Play Again
+          </button>
+          <button class="btn menu-btn" id="goToMenuBtn">
+            <i class="fas fa-home"></i> Main Menu
+          </button>
+          <button class="btn share-btn" id="shareResultsBtn">
+            <i class="fas fa-share-alt"></i> Share Results
+          </button>
+        </div>
+        
+        <div class="performance-tips">
+          <h4><i class="fas fa-lightbulb"></i> Tips to Improve</h4>
+          <ul>
+            <li>Practice daily for 10-15 minutes</li>
+            <li>Focus on accuracy first, then speed</li>
+            <li>Use all fingers for typing</li>
+            <li>Try to beat your high score!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Play Screen -->
+    <div id="howToPlayScreen" class="hide">
+      <div class="guide-container">
+        <div class="guide-header">
+          <button class="back-btn" id="backFromGuideBtn">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <h2><i class="fas fa-book"></i> HOW TO PLAY</h2>
+        </div>
+        
+        <div class="guide-content">
+          <div class="guide-section">
+            <div class="section-icon">
+              <i class="fas fa-keyboard"></i>
+            </div>
+            <div class="section-content">
+              <h3>1. The Challenge</h3>
+              <p>Words will appear on the screen. Your goal is to type them as quickly and accurately as possible.</p>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="section-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="section-content">
+              <h3>2. Scoring System</h3>
+              <ul>
+                <li><strong>+10 points</strong> for each correct word</li>
+                <li><strong>Extra time</strong> added for correct words</li>
+                <li><strong>Higher difficulty</strong> gives more points</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="section-icon">
+              <i class="fas fa-cog"></i>
+            </div>
+            <div class="section-content">
+              <h3>3. Difficulty Levels</h3>
+              <div class="difficulty-guide">
+                <div class="diff-item easy">
+                  <h4>Easy</h4>
+                  <p>30 seconds start time<br>+5 seconds per word</p>
+                </div>
+                <div class="diff-item medium">
+                  <h4>Medium</h4>
+                  <p>20 seconds start time<br>+3 seconds per word</p>
+                </div>
+                <div class="diff-item hard">
+                  <h4>Hard</h4>
+                  <p>15 seconds start time<br>+2 seconds per word</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="section-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="section-content">
+              <h3>4. Statistics</h3>
+              <p>Track your performance with:</p>
+              <ul>
+                <li><strong>WPM:</strong> Words per minute</li>
+                <li><strong>Accuracy:</strong> Percentage of correct words</li>
+                <li><strong>Streak:</strong> Consecutive correct words</li>
+                <li><strong>High Score:</strong> Your best performance</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="section-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="section-content">
+              <h3>5. Tips for Success</h3>
+              <div class="tips-grid">
+                <div class="tip">
+                  <i class="fas fa-eye"></i>
+                  <p>Focus on the screen, not the keyboard</p>
+                </div>
+                <div class="tip">
+                  <i class="fas fa-fist-raised"></i>
+                  <p>Stay calm under time pressure</p>
+                </div>
+                <div class="tip">
+                  <i class="fas fa-history"></i>
+                  <p>Practice regularly to improve</p>
+                </div>
+                <div class="tip">
+                  <i class="fas fa-target"></i>
+                  <p>Aim for accuracy first, then speed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="guide-footer">
+          <button class="btn start-guide-btn" id="startFromGuideBtn">
+            <i class="fas fa-play"></i> Start Playing Now!
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <p><i class="fas fa-heart"></i> Created by bilal-svg-dot</p>
+          <a href="https://instagram.com/isthat.ba" target="_blank" class="instagram-link">
+            <i class="fab fa-instagram"></i> @isthat.ba
+          </a>
+        </div>
+        <div class="footer-section">
+          <p><i class="fas fa-code"></i> Key Race Game v2.0</p>
+          <p><i class="fas fa-gamepad"></i> All features working!</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
