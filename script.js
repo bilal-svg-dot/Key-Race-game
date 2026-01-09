@@ -24,6 +24,12 @@ let currentStreak = 0;
 let bestStreak = 0;
 let gameStartTime = 0;
 let lastWordTime = 0;
+// Add this near other game state variables
+let currentCategory = "general";
+let wordBanks = {}; // Will be imported
+
+// Add this to DOM Elements section
+const wordCategorySelect = document.getElementById('wordCategory');
 
 // DOM Elements
 const settingsBtn = document.getElementById('settings-btn');
@@ -78,47 +84,77 @@ const finalHighScore = document.getElementById('finalHighScore');
 const resultsMessage = document.getElementById('resultsMessage');
 
 // Initialize Game
-function initGame() {
-  loadSettings();
-  setupEventListeners();
-  updateUI();
+// Update the initGame function to load word banks
+async function initGame() {
+    loadSettings();
+    await loadWordBanks();  // Add this line
+    setupEventListeners();
+    updateUI();
 }
 
-// Load settings from localStorage
+// Add this function to load word banks
+async function loadWordBanks() {
+    try {
+        // Import the word banks module
+        const wordsModule = await import('./words.js');
+        wordBanks = wordsModule.wordBanks;
+        console.log('Word banks loaded successfully');
+    } catch (error) {
+        console.error('Error loading word banks:', error);
+        // Fallback to original words
+        wordBanks = {
+            general: words  // Use your original words array as fallback
+        };
+    }
+}
+
+// Update loadSettings function
+// REPLACE your existing loadSettings() function with this:
 function loadSettings() {
-  const savedName = localStorage.getItem('keyRacePlayerName');
-  const savedDifficulty = localStorage.getItem('keyRaceDifficulty');
-  const savedHighScore = localStorage.getItem('keyRaceHighScore');
-  
-  if (savedName) {
-    currentPlayerName = savedName;
-    playerNameInput.value = savedName;
-  }
-  
-  if (savedDifficulty) {
-    currentDifficulty = savedDifficulty;
-    difficultySelect.value = savedDifficulty;
-  }
-  
-  if (savedHighScore) {
-    highScore = parseInt(savedHighScore);
-  }
+    const savedName = localStorage.getItem('keyRacePlayerName');
+    const savedDifficulty = localStorage.getItem('keyRaceDifficulty');
+    const savedHighScore = localStorage.getItem('keyRaceHighScore');
+    const savedCategory = localStorage.getItem('keyRaceCategory');  // Add this line
+    
+    if (savedName) {
+        currentPlayerName = savedName;
+        playerNameInput.value = savedName;
+    }
+    
+    if (savedDifficulty) {
+        currentDifficulty = savedDifficulty;
+        difficultySelect.value = savedDifficulty;
+    }
+    
+    if (savedHighScore) {
+        highScore = parseInt(savedHighScore);
+    }
+    
+    if (savedCategory) {  // Add this section
+        currentCategory = savedCategory;
+        wordCategorySelect.value = savedCategory;
+    }
 }
 
-// Save settings to localStorage
+// Update saveSettings function
+// REPLACE your existing saveSettings() function with this:
 function saveSettings() {
-  const name = playerNameInput.value.trim() || "Player";
-  const difficulty = difficultySelect.value;
-  
-  localStorage.setItem('keyRacePlayerName', name);
-  localStorage.setItem('keyRaceDifficulty', difficulty);
-  
-  currentPlayerName = name;
-  currentDifficulty = difficulty;
-  
-  showSaveMessage("Settings saved successfully!", "success");
-  updateUI();
+    const name = playerNameInput.value.trim() || "Player";
+    const difficulty = difficultySelect.value;
+    const category = wordCategorySelect.value;  // Add this line
+    
+    localStorage.setItem('keyRacePlayerName', name);
+    localStorage.setItem('keyRaceDifficulty', difficulty);
+    localStorage.setItem('keyRaceCategory', category);  // Add this line
+    
+    currentPlayerName = name;
+    currentDifficulty = difficulty;
+    currentCategory = category;  // Add this line
+    
+    showSaveMessage("Settings saved successfully!", "success");
+    updateUI();
 }
+
 
 function showSaveMessage(message, type) {
   saveMessage.textContent = message;
@@ -174,6 +210,7 @@ function toggleSettings() {
 }
 
 // Update UI elements
+// Update UI elements
 function updateUI() {
   currentPlayerNameDisplay.textContent = currentPlayerName;
   currentDifficultyDisplay.textContent = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
@@ -182,8 +219,24 @@ function updateUI() {
   // Update difficulty badge
   gameDifficultyBadge.textContent = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
   gameDifficultyBadge.className = `difficulty-badge ${currentDifficulty}`;
+  
+  // 🟢 ADD THIS NEW SECTION FOR CATEGORY DISPLAY:
+  // Update category display if element exists (optional)
+  const categoryDisplay = document.getElementById('currentCategoryName');
+  if (categoryDisplay) {
+      const categoryNames = {
+          'general': '🌐 General',
+          'coding': '💻 Coding',
+          'football': '⚽ Football',
+          'movies': '🎬 Movies',
+          'animals': '🐾 Animals',
+          'geography': '🌎 Geography',
+          'science': '🔬 Science',
+          'food': '🍕 Food'
+      };
+      categoryDisplay.textContent = categoryNames[currentCategory] || 'General';
+  }
 }
-
 // Navigation functions
 function startSinglePlayerGame() {
   hideAllScreens();
@@ -290,13 +343,21 @@ function updateGameStats() {
   currentStreakDisplay.textContent = currentStreak;
 }
 
+// REPLACE your existing generateNewWord() function with this:
 function generateNewWord() {
-  currentWord = words[Math.floor(Math.random() * words.length)];
-  currentWordDisplay.textContent = currentWord;
-  
-  // Reset progress bar
-  wordProgress.style.width = '0%';
-  textInput.value = '';
+    if (!wordBanks[currentCategory] || wordBanks[currentCategory].length === 0) {
+        console.error('No words available for category:', currentCategory);
+        currentWord = "loading...";
+        currentWordDisplay.textContent = currentWord;
+        return;
+    }
+    
+    currentWord = wordBanks[currentCategory][Math.floor(Math.random() * wordBanks[currentCategory].length)];
+    currentWordDisplay.textContent = currentWord;
+    
+    // Reset progress bar
+    wordProgress.style.width = '0%';
+    textInput.value = '';
 }
 
 function handleTextInput(e) {

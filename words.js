@@ -1,0 +1,148 @@
+// words.js - Word banks for different categories
+
+export const wordBanks = {
+    general: [
+        "sigh", "tense", "airplane", "ball", "pies", "juice", "warlike", "bad",
+        "north", "dependent", "steer", "silver", "highfalutin", "superficial",
+        "quince", "eight", "feeble", "admit", "drag", "loving", "speed", "game",
+        "typing", "challenge", "keyboard", "computer", "program", "developer",
+        "javascript", "website", "internet", "coding", "practice", "skill",
+        "improve", "accuracy", "speed", "reaction", "focus", "concentration"
+    ],
+    
+    coding: [
+        "algorithm", "variable", "function", "database", "framework", "compiler", 
+        "syntax", "iteration", "recursion", "inheritance", "polymorphism", "encapsulation",
+        "abstraction", "interface", "debugging", "compilation", "execution", "parameter",
+        "argument", "statement", "expression", "operator", "operand", "conditional",
+        "loop", "array", "object", "class", "method", "property", "attribute",
+        "constant", "pointer", "reference", "template", "generic", "namespace", "library",
+        "module", "package", "dependency", "repository", "version", "control", "merge",
+        "branch", "commit", "push", "pull", "html", "css", "javascript", "typescript",
+        "react", "angular", "vue", "node", "express", "api", "endpoint", "request",
+        "response", "header", "cookie", "session", "authentication", "authorization",
+        "middleware", "router", "component", "state", "props", "hook", "context", "redux",
+        "graphql", "rest", "json", "xml", "websocket", "responsive", "flexbox", "grid",
+        "viewport", "mediaquery", "sass", "less", "webpack", "babel", "npm", "yarn",
+        "package", "module", "import", "export", "async", "await", "promise", "callback",
+        "blockchain", "cryptography", "machine", "learning", "neural", "network"
+    ],
+    
+    football: [
+        "goalkeeper", "striker", "midfielder", "defender", "winger", "fullback",
+        "centerback", "sweeper", "libero", "playmaker", "captain", "substitute",
+        "manager", "coach", "referee", "assistant", "linesman", "fourth", "official",
+        "attacker", "forward", "target", "false", "holding", "box", "wingback",
+        "stopper", "regista", "trequartista", "carrilero", "dribble", "tackle",
+        "pass", "shot", "header", "volley", "cross", "corner", "free", "kick",
+        "penalty", "throw", "save", "clearance", "interception", "block", "marking",
+        "pressing", "counterattack", "possession", "build", "overlap", "through",
+        "lob", "chip", "curl", "drive", "flick", "backheel", "nutmeg", "feint",
+        "stepover", "roulette", "elastic", "scissor", "bicycle", "overhead", "slide",
+        "challenge", "jockey", "pitch", "goalpost", "crossbar", "net", "penalty",
+        "area", "box", "center", "circle", "halfline", "touchline", "byline",
+        "corner", "flag", "whistle", "card", "yellow", "red", "offside", "handball",
+        "foul", "advantage", "injury", "stoppage", "extra", "overtime", "shootout",
+        "aggregate", "away", "premier", "league", "champions", "europa", "fa", "cup",
+        "world", "continental", "domestic", "derby", "rivalry", "promotion", "relegation"
+    ],
+    
+    movies: [
+        "director", "producer", "screenwriter", "cinematographer", "editor",
+        "composer", "production", "designer", "costume", "makeup", "artist",
+        "stunt", "coordinator", "casting", "agent", "studio", "independent",
+        "blockbuster", "budget", "box", "office", "gross", "revenue", "profit",
+        "sequel", "prequel", "reboot", "remake", "adaptation", "franchise",
+        "trilogy", "saga", "credits", "trailer", "teaser", "premiere", "festival",
+        "distribution", "marketing", "merchandise", "action", "comedy", "drama",
+        "horror", "thriller", "romance", "science", "fiction", "fantasy", "animation",
+        "documentary", "biographical", "historical", "musical", "western", "noir",
+        "experimental", "art", "house", "silent", "short", "feature", "length",
+        "epic", "mockumentary", "parody", "satire", "slapstick", "psychological",
+        "supernatural", "screenplay", "dialogue", "monologue", "narration", "voiceover",
+        "storyboard", "script", "scene", "shot", "take", "angle", "close", "medium",
+        "long", "establishing", "tracking", "pan", "tilt", "zoom", "crane", "steadicam",
+        "dolly", "lighting", "exposure", "aperture", "focus", "depth", "field",
+        "aspect", "ratio", "protagonist", "antagonist", "hero", "villain", "character",
+        "arc", "development", "plot", "subplot", "twist", "climax", "resolution",
+        "foreshadowing", "flashback", "montage", "sequence", "motif", "theme",
+        "symbolism", "metaphor", "allegory", "atmosphere", "mood", "tone", "pacing",
+        "suspense", "tension", "conflict", "resolution", "ending"
+    ],
+    
+    animals: [
+        "elephant", "giraffe", "kangaroo", "rhinoceros", "hippopotamus", "zebra",
+        "lion", "tiger", "leopard", "cheetah", "panther", "jaguar", "wolf", "fox",
+        "coyote", "bear", "panda", "koala", "gorilla", "chimpanzee", "orangutan",
+        "monkey", "baboon", "dolphin", "whale", "shark", "seal", "walrus", "otter",
+        "beaver", "squirrel", "rabbit", "hare", "deer", "moose", "elk", "buffalo",
+        "bison", "camel", "llama", "alpaca", "horse", "donkey", "hyena", "meerkat",
+        "mongoose", "hedgehog", "porcupine", "armadillo", "eagle", "hawk", "falcon",
+        "owl", "parrot", "penguin", "flamingo", "peacock", "ostrich", "emu", "swan",
+        "goose", "duck", "pigeon", "sparrow", "robin", "cardinal", "bluejay",
+        "woodpecker", "hummingbird", "seagull", "pelican", "stork", "heron", "crane",
+        "vulture", "crow", "raven", "magpie", "canary", "alligator", "crocodile",
+        "snake", "python", "cobra", "viper", "rattlesnake", "lizard", "gecko",
+        "chameleon", "iguana", "turtle", "tortoise", "terrapin", "frog", "toad",
+        "salamander", "newt", "axolotl", "komodo", "dragon", "anaconda", "boa",
+        "constrictor", "garter", "sidewinder", "mamba", "taipan", "rattler", "adder"
+    ],
+    
+    geography: [
+        "mountain", "valley", "plateau", "plain", "hill", "cliff", "canyon", "gorge",
+        "ravine", "ridge", "peak", "summit", "volcano", "crater", "glacier", "iceberg",
+        "fjord", "peninsula", "isthmus", "archipelago", "island", "atoll", "reef",
+        "continent", "subcontinent", "desert", "oasis", "dune", "savanna", "prairie",
+        "steppe", "tundra", "forest", "jungle", "rainforest", "wetland", "marsh",
+        "swamp", "delta", "estuary", "ocean", "sea", "lake", "river", "stream",
+        "creek", "brook", "pond", "waterfall", "rapids", "whirlpool", "spring",
+        "geyser", "hotspring", "lagoon", "inlet", "bay", "gulf", "strait", "channel",
+        "canal", "reservoir", "aquifer", "watershed", "tributary", "confluence",
+        "meander", "oxbow", "floodplain", "coastline", "latitude", "longitude",
+        "equator", "meridian", "parallel", "tropic", "arctic", "antarctic", "hemisphere",
+        "timezone", "climate", "weather", "precipitation", "temperature", "humidity",
+        "altitude", "elevation", "depth", "distance", "scale", "map", "atlas", "globe",
+        "compass", "cardinal", "direction", "north", "south", "east", "west"
+    ],
+    
+    science: [
+        "organism", "cell", "tissue", "organ", "system", "dna", "rna", "gene",
+        "chromosome", "mitosis", "meiosis", "evolution", "species", "genus", "family",
+        "order", "class", "phylum", "kingdom", "domain", "photosynthesis", "respiration",
+        "digestion", "circulation", "nervous", "endocrine", "reproductive", "skeletal",
+        "muscular", "immune", "ecosystem", "habitat", "biodiversity", "conservation",
+        "extinction", "predator", "prey", "symbiosis", "parasitism", "mutualism",
+        "atom", "molecule", "element", "compound", "mixture", "solution", "reaction",
+        "catalyst", "enzyme", "acid", "base", "ph", "ion", "isotope", "electron",
+        "proton", "neutron", "bond", "covalent", "ionic", "metallic", "periodic",
+        "table", "metal", "nonmetal", "metalloid", "noble", "gas", "organic", "inorganic",
+        "force", "motion", "velocity", "acceleration", "gravity", "friction", "energy",
+        "work", "power", "momentum", "inertia", "quantum", "relativity", "thermodynamics",
+        "entropy", "particle", "wave", "frequency", "wavelength", "amplitude", "electricity",
+        "magnetism", "circuit", "resistance", "voltage", "current", "conductor", "insulator",
+        "semiconductor", "superconductor", "geology", "meteorology", "astronomy", "oceanography",
+        "seismology", "volcanology", "paleontology", "mineral", "rock", "igneous", "sedimentary",
+        "metamorphic", "fossil", "earthquake", "tsunami", "hurricane", "tornado", "typhoon",
+        "atmosphere", "hydrosphere", "lithosphere", "biosphere", "greenhouse", "ozone", "climate"
+    ],
+    
+    food: [
+        "italian", "mexican", "chinese", "japanese", "indian", "thai", "french", "spanish",
+        "greek", "mediterranean", "middle", "eastern", "caribbean", "brazilian", "peruvian",
+        "korean", "vietnamese", "lebanese", "turkish", "moroccan", "ethiopian", "hawaiian",
+        "californian", "cajun", "creole", "soul", "vegetarian", "vegan", "gluten", "free",
+        "baking", "roasting", "grilling", "broiling", "frying", "sautéing", "stir", "frying",
+        "steaming", "boiling", "simmering", "poaching", "braising", "stewing", "blanching",
+        "marinating", "brining", "curing", "smoking", "fermenting", "pickling", "dehydrating",
+        "sous", "vide", "microwaving", "pressure", "cooking", "avocado", "tomato", "potato",
+        "onion", "garlic", "ginger", "spinach", "kale", "lettuce", "cucumber", "carrot",
+        "broccoli", "cauliflower", "eggplant", "zucchini", "mushroom", "bell", "pepper",
+        "chili", "asparagus", "artichoke", "olive", "coconut", "almond", "walnut", "pecan",
+        "pistachio", "sesame", "flax", "chia", "quinoa", "rice", "pasta", "noodle", "bread",
+        "flour", "yeast", "sugar", "honey", "maple", "syrup", "chocolate", "vanilla", "cinnamon",
+        "nutmeg", "paprika", "turmeric", "cumin", "coriander", "basil", "appetizer", "entree",
+        "main", "course", "dessert", "beverage", "breakfast", "brunch", "lunch", "dinner",
+        "supper", "snack", "recipe", "ingredient", "measurement", "teaspoon", "tablespoon",
+        "cup", "ounce", "gram", "kilo", "temperature", "preheat", "mix", "whisk"
+    ]
+};
