@@ -24,8 +24,7 @@ export const wordBanks = {
         "middleware", "router", "component", "state", "props", "hook", "context", "redux",
         "graphql", "rest", "json", "xml", "websocket", "responsive", "flexbox", "grid",
         "viewport", "mediaquery", "sass", "less", "webpack", "babel", "npm", "yarn",
-        "package", "module", "import", "export", "async", "await", "promise", "callback",
-        "blockchain", "cryptography", "machine", "learning", "neural", "network"
+        "package", "module", "import", "export", "async", "await", "promise", "callback"
     ],
     
     football: [
@@ -84,8 +83,7 @@ export const wordBanks = {
         "vulture", "crow", "raven", "magpie", "canary", "alligator", "crocodile",
         "snake", "python", "cobra", "viper", "rattlesnake", "lizard", "gecko",
         "chameleon", "iguana", "turtle", "tortoise", "terrapin", "frog", "toad",
-        "salamander", "newt", "axolotl", "komodo", "dragon", "anaconda", "boa",
-        "constrictor", "garter", "sidewinder", "mamba", "taipan", "rattler", "adder"
+        "salamander", "newt", "axolotl", "komodo", "dragon", "anaconda", "boa"
     ],
     
     geography: [
@@ -122,8 +120,7 @@ export const wordBanks = {
         "magnetism", "circuit", "resistance", "voltage", "current", "conductor", "insulator",
         "semiconductor", "superconductor", "geology", "meteorology", "astronomy", "oceanography",
         "seismology", "volcanology", "paleontology", "mineral", "rock", "igneous", "sedimentary",
-        "metamorphic", "fossil", "earthquake", "tsunami", "hurricane", "tornado", "typhoon",
-        "atmosphere", "hydrosphere", "lithosphere", "biosphere", "greenhouse", "ozone", "climate"
+        "metamorphic", "fossil", "earthquake", "tsunami", "hurricane", "tornado", "typhoon"
     ],
     
     food: [
