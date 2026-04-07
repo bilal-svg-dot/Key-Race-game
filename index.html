@@ -8,7 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Key Race Game</title>
+    <title>Key Race Game - Ultimate Typing Challenge</title>
   </head>
   <body>
     <!-- Settings Button -->
@@ -39,7 +39,6 @@
           <input type="text" id="playerName" placeholder="Enter your name">
         </div>
         
-        <!-- 🟢 WORD CATEGORY SELECTOR - CORRECTLY PLACED INSIDE SETTINGS -->
         <div class="setting-group">
           <label for="wordCategory">
             <i class="fas fa-tags"></i> Word Category
@@ -55,7 +54,6 @@
             <option value="food">🍕 Food & Cooking</option>
           </select>
         </div>
-        <!-- 🟢 END OF CATEGORY SELECTOR -->
         
         <button id="saveSettingsBtn" class="btn save-btn">
           <i class="fas fa-save"></i> Save Settings
@@ -144,6 +142,9 @@
             <h2><i class="fas fa-keyboard"></i> TYPING CHALLENGE</h2>
             <div class="difficulty-badge" id="gameDifficultyBadge">
               Medium
+            </div>
+            <div class="category-badge" id="gameCategoryBadge">
+              <i class="fas fa-tags"></i> <span id="currentCategoryName">General</span>
             </div>
           </div>
           <div class="player-display">
@@ -379,6 +380,7 @@
                 <li><strong>+10 points</strong> for each correct word</li>
                 <li><strong>Extra time</strong> added for correct words</li>
                 <li><strong>Higher difficulty</strong> gives more points</li>
+                <li><strong>Power-ups</strong> appear randomly for bonus points!</li>
               </ul>
             </div>
           </div>
@@ -408,10 +410,24 @@
           
           <div class="guide-section">
             <div class="section-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="section-content">
+              <h3>4. Power-Ups</h3>
+              <ul>
+                <li><strong>⚡ Double Points:</strong> 2x points for 10 seconds</li>
+                <li><strong>❄️ Time Freeze:</strong> Timer stops for 5 seconds</li>
+                <li><strong>🐢 Slow Time:</strong> Timer moves 50% slower</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="guide-section">
+            <div class="section-icon">
               <i class="fas fa-chart-line"></i>
             </div>
             <div class="section-content">
-              <h3>4. Statistics</h3>
+              <h3>5. Statistics</h3>
               <p>Track your performance with:</p>
               <ul>
                 <li><strong>WPM:</strong> Words per minute</li>
@@ -427,7 +443,7 @@
               <i class="fas fa-trophy"></i>
             </div>
             <div class="section-content">
-              <h3>5. Tips for Success</h3>
+              <h3>6. Tips for Success</h3>
               <div class="tips-grid">
                 <div class="tip">
                   <i class="fas fa-eye"></i>
@@ -468,12 +484,12 @@
           </a>
         </div>
         <div class="footer-section">
-          <p><i class="fas fa-code"></i> Key Race Game v2.0</p>
-          <p><i class="fas fa-gamepad"></i> All features working!</p>
+          <p><i class="fas fa-code"></i> Key Race Game v3.0</p>
+          <p><i class="fas fa-gamepad"></i> Power-ups & Effects!</p>
         </div>
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
